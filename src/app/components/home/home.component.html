@@ -1,0 +1,17 @@
+<!-- //viewchild 获取dom元素 -->
+<p #homes>home works!</p>
+
+
+<!-- 通过viewchild调用子组件的方法  父子组件传值 传方法 this可以获取怎么父组件-->
+<app-cars #tom [title]='title' [run]='run' [allparent]='this'></app-cars>
+<div *ngFor='let item of list;let key=index' [hidden]='key==2'>
+  <p *ngIf='key==1'>{{item.name}}</p>
+</div>
+
+<!-- 
+    子组件获取父组件的值或者方法
+        ---------[XXX]="XXX"  @Input
+        ---------@OutPut EventEmitter
+    父组件获取子组件的子或者方法---------#names  @ViewChild
+ -->
+<app-cars (ourers)="xixhafio($event)"></app-cars>
