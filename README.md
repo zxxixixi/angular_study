@@ -126,3 +126,67 @@ this.http.get(api).subscribe((res)=>{
     console.log(res)
 })
 
+<!-- 路由 -->
+const routes: Routes = [
+     {
+        path: 'home', component: HomeComponent}
+     },
+     //动态路由
+     {
+        path: 'new:id', component: NewComponent}
+     }
+     //任意路由
+     {
+        path: '**',
+        redirectTo: '/home'
+     }
+]
+//路由跳转
+<a [routerLink]="[ '/home' ]" routerLinkActive="actice">跳转</a>
+.active{
+    color: red
+}
+
+//第一种路由传参方式
+<a [routerLink]="[ '/home' ]" [queryParams]="{aid:key}" routerLinkActive="actice">跳转</a>
+获取：
+1.import {ActivatedRoute} from '@angular/router';
+2.constructor(public routeL:ActivatedRoute)
+3.this.route.queryParams.subscribe((data)=>{
+  console.log(data)
+})  //路由拿到的也是rxjs格式的
+
+//第二种路由传参方式
+<a [routerLink]="[ '/home'，key ]" routerLinkActive="actice">跳转</a>
+获取：
+1.import {ActivatedRoute} from '@angular/router';
+2.constructor(public routeL:ActivatedRoute)
+3.this.route.params.subscribe((data)=>{
+  console.log(data)
+})  //路由拿到的也是rxjs格式的
+
+//js跳转 适合普通路由和动态路由
+1.import {Router} from '@angular/router';
+2.constructor(public router:Router)
+3.this.router.navigate(['/new',2343])
+
+//js跳转 传值路由
+1.import {Router,NavigationExtras} from '@angular/router';
+2.let navigationExtras: NavigationExtras = {
+    queryParams: {'id':'23'}
+    fragment: 'anchor'
+}
+this.router.navigate(['/news'], navigationExtras);
+
+<!-- 父子路由 -->
+{
+        path: 'home', component: HomeComponent,
+        children: [
+            {
+               path: 'name', component: NameComponent,
+            },{
+               path: '**',redirectTo:'/home'
+            }
+        ]
+
+}
